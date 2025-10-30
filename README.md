@@ -1,9 +1,9 @@
 # Platform SSO Implementation Guide for Jamf Pro
 ## Zero-Touch Deployment with Jamf Connect and Jamf Protect
 
-**Document Version:** 1.0  
+**Document Version:** 1.1  
 **Last Updated:** 30 October 2025  
-**Target macOS Version:** macOS 13.0 Ventura and later (Recommended: macOS 14+ Sonoma)
+**Target macOS Version:** macOS 13.0 Ventura and later (Recommended: macOS 15+ Sequoia, macOS 26 Tahoe for Simplified Setup)
 
 ---
 
@@ -63,10 +63,13 @@ Platform Single Sign-On (Platform SSO) is a framework introduced by Apple in mac
 - Improved offline authentication handling
 - Enhanced network authentication grace periods
 
-**macOS 26.0 (Tahoe - Expected 2025)**
-- Simplified Setup for Platform SSO
-- Identity integration at Setup Assistant
-- Native provisioning of first local account
+**macOS 26 Tahoe (Released September 2025)**
+- **Simplified Setup for Platform SSO** - Identity authentication during Setup Assistant
+- Native provisioning of first local account from IdP credentials
+- **Authenticated Guest Mode** - Temporary IdP-authenticated sessions for shared devices
+- Tap to Login with NFC-enabled badges
+- Final macOS release supporting Intel-based Macs
+- New Liquid Glass design language across the platform
 
 ### Why Implement Platform SSO?
 
@@ -94,28 +97,37 @@ Platform Single Sign-On (Platform SSO) is a framework introduced by Apple in mac
 
 ### Apple Requirements
 
-- **macOS Version**: 13.0 Ventura or later (14.0+ Sonoma recommended)
+- **macOS Version**: 13.0 Ventura or later
+  - **macOS 15 Sequoia** - Current stable release with full Platform SSO support
+  - **macOS 26 Tahoe** - Latest release with Simplified Setup for Platform SSO (recommended for new deployments)
+  - **Note**: macOS 26 Tahoe is the final release supporting Intel-based Macs
 - **Apple Business Manager**: Active ABM account with MDM server token
 - **Automated Device Enrolment**: Devices enrolled via ADE (formerly DEP)
-- **Device Hardware**: Mac with T2 chip or Apple Silicon (for Secure Enclave)
+- **Device Hardware**: 
+  - **Apple Silicon** (M-series): All Macs with M1 or later (recommended)
+  - **Intel Macs with T2 chip**: Mac Pro (2019), MacBook Pro 16-inch (2019), MacBook Pro 13-inch (2020, four Thunderbolt 3 ports), iMac (2020)
+  - **Important**: No further macOS releases beyond Tahoe will support Intel-based Macs
 
 ### Jamf Requirements
 
 #### Jamf Pro
-- **Version**: 10.49.0 or later (11.0+ recommended)
+- **Version**: 11.20.0 or later (for macOS 26 Tahoe Simplified Setup support)
+  - **11.0+** - Basic Platform SSO support
+  - **11.20+** - Full Simplified Setup for Platform SSO support
 - **Hosting**: Cloud or on-premises with external accessibility
 - **Licence**: Active Jamf Pro licence
 - **Integration**: Connected to Apple Business Manager
 - **SCEP Certificate Authority**: Configured for device certificates
 
 #### Jamf Connect
-- **Version**: 2.31.0 or later
+- **Version**: 2.31.0 or later (2.35.0+ recommended for macOS 26)
 - **Licence**: Active Jamf Connect licence
 - **Identity Provider**: Configured integration (Entra ID, Okta, Google)
 - **Purpose**: Account creation and password synchronisation
+- **Note**: Works alongside Platform SSO for complementary functionality
 
 #### Jamf Protect
-- **Version**: 4.6.0 or later
+- **Version**: 5.0.0 or later (for macOS 26 support)
 - **Licence**: Active Jamf Protect licence
 - **Purpose**: Endpoint protection and compliance monitoring
 
@@ -126,20 +138,23 @@ Platform Single Sign-On (Platform SSO) is a framework introduced by Apple in mac
 - **Permissions**: Global Administrator or Application Administrator
 - **Applications**:
   - Enterprise SSO app configured
-  - Microsoft Company Portal app
+  - Microsoft Company Portal app (version 5.2504.0 or later for full Platform SSO GA support)
   - Conditional Access policies (optional but recommended)
 - **Features**:
   - Device registration enabled
   - Conditional Access (for compliance policies)
+  - **Platform SSO**: Generally Available (GA) as of August 2025
+  - **Simplified Setup**: Supported in macOS 26 Tahoe with latest Company Portal
 
 #### Okta (Alternative)
 - **Licence**: Okta Identity Engine
 - **Applications**:
   - Okta Device Access configured
-  - Okta Verify application
+  - Okta Verify application (version 9.52 or later for macOS 26 Simplified Setup support)
 - **Features**:
   - Device Trust enabled
   - SCEP certificate distribution
+  - **Simplified Setup**: Supported in macOS 26 Tahoe with Okta Verify 9.52+
 
 ### Network Requirements
 
@@ -2487,3 +2502,13 @@ sudo fdesetup list                               # List enabled users
 | **MFA** | Multifactor Authentication |
 | **WPJ** | Workplace Join - Microsoft device registration method |
 | **UPN** | User Principal Name - User identifier (email format) |
+
+---
+
+## Document Change Log
+
+| Version | Date | Author | Changes |
+|---------|------|--------|---------|
+| 1.0 | 30 Oct 2025 | David Crosby | Initial document creation |
+| 1.1 | 30 Oct 2025 | David Crosby | Updated for macOS 26 Tahoe release, added Simplified Setup section, updated version requirements, noted Intel Mac sunset |
+
