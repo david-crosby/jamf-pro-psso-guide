@@ -3,7 +3,7 @@
 
 **Document Version:** 1.0  
 **Date:** 30 October 2025  
-**Author:** David Crosby (Bing)
+**Author:** David Crosby (Bing) 
 **LinkedIn:** https://www.linkedin.com/in/david-bing-crosby/  
 
 ---
