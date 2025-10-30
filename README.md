@@ -7,7 +7,7 @@
 **LinkedIn:** https://www.linkedin.com/in/david-bing-crosby/  
 
 **Target macOS Version:** macOS 13.0 Ventura and later (Recommended: macOS 15 Sequoia or later)  
-**Simple Setup macOS Version:** macOS 26 Tahoe, see seperate guide (tahoe-setup-guide.md)  
+**Simple Setup macOS Version:** macOS 26 Tahoe, see seperate guide (https://github.com/david-crosby/jamf-pro-psso-guide/blob/main/tahoe-setup-guide.md)  
 
 ---
 
