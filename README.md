@@ -4,9 +4,11 @@
 **Document Version:** 1.1  
 **Date:** 30 October 2025  
 **Author:** David Crosby (Bing)
+
 **LinkedIn:** https://www.linkedin.com/in/david-bing-crosby/  
 
-**Target macOS Version:** macOS 13.0 Ventura and later (Recommended: macOS 15+ Sequoia, macOS 26 Tahoe for Simplified Setup)
+**Target macOS Version:** macOS 13.0 Ventura and later (Recommended: macOS 15 Sequoia or later)
+**Simple Setup macOS Version:** macOS 26 Tahoe, see seperate guide
 
 ---
 
